@@ -1,0 +1,10 @@
+# Python 3.12+ (built and tested on 3.14). Install into a venv named "venv" in this folder:
+#   python3 -m venv venv && venv/bin/pip install -r requirements.txt
+fastmcp==4.1.0
+pydantic-ai-slim[openai,mcp]==2.56.0
+python-dotenv==1.2.4
+fastapi==0.143.1
+uvicorn==0.54.0
+# tests
+pytest==9.1.1
+httpx==0.28.1

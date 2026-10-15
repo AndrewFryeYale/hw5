@@ -1,0 +1,261 @@
+{
+  "database": "data/campus_customs_new.db",
+  "reset_before_runs": true,
+  "reset_audit_seq": 220,
+  "runs": "Final runs after the Problem 10 prompt fixes (one agent run per ticket). The Problem 9 runs that over-called specialists are earlier in output/audit_trail.json (seq 84-200).",
+  "starting_checking_balance": 3400.0,
+  "payments": [
+    {
+      "id": 1,
+      "kind": "invoice",
+      "ref_id": 501,
+      "amount": 840.0,
+      "approved_by": "human:andrew"
+    },
+    {
+      "id": 2,
+      "kind": "rent",
+      "ref_id": 1,
+      "amount": 2400.0,
+      "approved_by": "human:andrew"
+    }
+  ],
+  "ending_checking_balance": 160.0,
+  "totals": {
+    "agent_runs": 3,
+    "delegations": 5,
+    "mcp_tool_calls": 18,
+    "total_tokens": 127528
+  },
+  "tickets": [
+    {
+      "id": 101,
+      "type": "customer_order",
+      "requester": "Tauhid Zaman",
+      "final_status": "resolved",
+      "short_outcome": "Size S of the Classic Bulldog Tee was out of stock (0). In one run the team offered the in-stock sizes M (5), L (3) and XL (2) or a size S reprint ready around 2026-09-05, and the Boss requested payment of the linked overdue invoice 501 ($840.00, Bulldog Print Co rush reprint) because it blocks that reprint. A human approved it (approval #1 → payment #1), and a person closed the ticket after sending the drafted reply.",
+      "checking_change": -840.0,
+      "agent_runs": [
+        {
+          "run_id": "f2ea2a81c288",
+          "audit_seq": [
+            221,
+            238
+          ],
+          "boss_status_at_end": "waiting_on_approval",
+          "delegations": [
+            "boss -> inventory",
+            "boss -> customer_service"
+          ],
+          "specialists": [
+            "customer_service",
+            "inventory"
+          ],
+          "mcp_tool_calls": 7,
+          "total_tokens": 53722,
+          "guardrail_rejections": 0,
+          "blocked_calls": 0
+        }
+      ],
+      "agent_contributions": {
+        "boss": {
+          "tools_used": {
+            "get_ticket": 1,
+            "get_cash_position": 1,
+            "request_approval": 1,
+            "update_ticket": 1
+          },
+          "delegated_to": [
+            "inventory",
+            "customer_service"
+          ],
+          "reports": [
+            "Size S is out of stock, so I offered the available M, L, and XL alternatives or a size S reprint. Invoice 501 is an open invoice for the matching rush reprint, 3 days overdue, so I requested human approval to pay $840.0 because it is blocking the order. The reprint has a 5-day vendor lead time and is expected around 2026-09-05 if ordered today, subject to the internal payment process and the customer's choice."
+          ]
+        },
+        "inventory": {
+          "tools_used": {
+            "check_stock": 1,
+            "list_vendors": 1,
+            "get_invoice": 1
+          },
+          "delegated_to": [],
+          "reports": [
+            "Size S is out of stock (0 in Aisle B). Sizes L (3), M (5), and XL (2) are available. Bulldog Print Co can reprint the S size in 5 days; its ready date if ordered today is 2026-09-05, but linked invoice 501 is relevant because it describes a rush reprint of CC-TEE-WHITE S and is open 3 days overdue, so delivery is blocked until payment."
+          ]
+        },
+        "customer_service": {
+          "tools_used": {},
+          "delegated_to": [],
+          "reports": [
+            "Draft explains that the requested Bulldog Tee in size S is unavailable, offers available sizes M, L, and XL, and offers the S reprint with timing phrased as about 5 days after ordering. The draft uses the provided list price and does not mention internal payment processing."
+          ]
+        }
+      },
+      "customer_message_sent_by_human": "Hi Tauhid,\n\nThe Bulldog Tee in size S is currently unavailable (0 in stock). We can offer size M (5 available), L (3 available), or XL (2 available) at the list price of $28.0. Alternatively, the size S reprint should be ready about 5 days after it is ordered—around 2026-09-05 if ordered today.\n\nPlease reply with your preferred available size or confirm that you’d like the size S reprint.\n\nCampus Customs",
+      "human_approvals": [
+        {
+          "type": "approval",
+          "approval_id": 1,
+          "kind": "invoice",
+          "ref_id": 501,
+          "amount": 840.0,
+          "requested_by": "boss",
+          "decision": "approved",
+          "decided_by": "andrew",
+          "decided_at": "2026-08-31",
+          "payment_id": 1,
+          "payment_approved_by": "human:andrew"
+        },
+        {
+          "type": "marked_resolved",
+          "decided_by": "andrew",
+          "note": "Desk reviewed and sent the drafted reply to Tauhid (sizes M/L/XL in stock now, or a size S reprint around 2026-09-05). Overdue invoice 501 ($840.00) was paid via approval #1, which unblocks the reprint. Closed at the desk; a follow-up order opens a new ticket.",
+          "audit_seq": 271
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "type": "rent_notice",
+      "requester": "Elm City Properties",
+      "final_status": "resolved",
+      "short_outcome": "The rent notice matched lease 1: $2,400.00 to Elm City Properties, due 2026-09-02 (2 days). Accounting verified it, the Boss requested approval, a human approved it (approval #2 → payment #2), lease next_due moved to 2026-10-02, and the approval moved the ticket to resolved automatically.",
+      "checking_change": -2400.0,
+      "agent_runs": [
+        {
+          "run_id": "262436cbe4eb",
+          "audit_seq": [
+            240,
+            254
+          ],
+          "boss_status_at_end": "waiting_on_approval",
+          "delegations": [
+            "boss -> accounting"
+          ],
+          "specialists": [
+            "accounting"
+          ],
+          "mcp_tool_calls": 7,
+          "total_tokens": 35083,
+          "guardrail_rejections": 0,
+          "blocked_calls": 0
+        }
+      ],
+      "agent_contributions": {
+        "boss": {
+          "tools_used": {
+            "get_ticket": 1,
+            "request_approval": 1,
+            "update_ticket": 1
+          },
+          "delegated_to": [
+            "accounting"
+          ],
+          "reports": [
+            "The rent notice was verified against lease 1: Elm City Properties is owed $2400.00 for the Chapel Street shop, due 2026-09-02, which is two days after the shop date. I queued the rent payment for human approval; it has not been paid. The payment would leave $160.00 after obligations, so the owner should account for the low-cash position."
+          ]
+        },
+        "accounting": {
+          "tools_used": {
+            "get_lease": 1,
+            "list_payments": 1,
+            "get_cash_position": 1,
+            "list_approvals": 1
+          },
+          "delegated_to": [],
+          "reports": [
+            "Lease 1 verifies the Elm City Properties notice: rent is $2400.00 due 2026-09-02, exactly 2 days after shop_date 2026-08-31. No rent payment is recorded and no pending approval is found for ticket #102; checking has $2560.00, and after the obligation the tool reports $160.00 remaining, so funding is sufficient but triggers a low-cash alert."
+          ]
+        }
+      },
+      "customer_message_sent_by_human": "Your rent notice has been verified. A $2,400.00 payment for the Chapel Street shop, due September 2, 2026, is scheduled for approval and will be processed once approved.",
+      "human_approvals": [
+        {
+          "type": "approval",
+          "approval_id": 2,
+          "kind": "rent",
+          "ref_id": 1,
+          "amount": 2400.0,
+          "requested_by": "boss",
+          "decision": "approved",
+          "decided_by": "andrew",
+          "decided_at": "2026-08-31",
+          "payment_id": 2,
+          "payment_approved_by": "human:andrew"
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "type": "price_override",
+      "requester": "Yale AI Club",
+      "final_status": "resolved",
+      "short_outcome": "The Boss approved the maximum policy discount: 20% off, $46.40/unit, $928.00 total (52.6% margin, above cost), with a $464.00 (50%) deposit because 12 of the 20 size-M hoodies must be reordered (8 in stock, $264.00 reorder, ready around 2026-09-05). No money moved. A person closed the ticket after sending the approved quote; the deposit is recorded with Record money received and the reorder opens a new ticket.",
+      "checking_change": 0.0,
+      "agent_runs": [
+        {
+          "run_id": "f9529a0b7236",
+          "audit_seq": [
+            256,
+            270
+          ],
+          "boss_status_at_end": "waiting_on_customer",
+          "delegations": [
+            "boss -> accounting",
+            "boss -> customer_service"
+          ],
+          "specialists": [
+            "accounting",
+            "customer_service"
+          ],
+          "mcp_tool_calls": 4,
+          "total_tokens": 38723,
+          "guardrail_rejections": 0,
+          "blocked_calls": 0
+        }
+      ],
+      "agent_contributions": {
+        "boss": {
+          "tools_used": {
+            "get_ticket": 1,
+            "update_ticket": 1
+          },
+          "delegated_to": [
+            "accounting",
+            "customer_service"
+          ],
+          "reports": [
+            "Approved the maximum policy discount for this 20-unit bulk order: 20% off, while the quote remains above cost with a 52.6% margin. The quoted price is $46.40 per hoodie, or $928.00 total, with a required 50% deposit of $464.00. Eight size M hoodies are on hand; the remaining 12 require a reorder, which is expected to be ready on 2026-09-05 if ordered today. The ticket is waiting for the club's confirmation and deposit before the reorder is placed."
+          ]
+        },
+        "accounting": {
+          "tools_used": {
+            "list_vendors": 1,
+            "quote_price": 1
+          },
+          "delegated_to": [],
+          "reports": [
+            "For ticket #103, the 20-unit CC-HOOD-NAVY size M quote at the permitted 20% discount is $46.40 per unit, $928.00 total, with a 50% deposit of $464.00. The quote is above cost with a 52.6% margin; 8 units are on hand, leaving a 12-unit shortfall and $264.00 reorder cost. Bulldog Print Co can restock apparel in 5 days, with a ready date of 2026-09-05; the deposit exceeds the reorder cost."
+          ]
+        },
+        "customer_service": {
+          "tools_used": {},
+          "delegated_to": [],
+          "reports": [
+            "Draft offers the Yale AI Club 20% discount quote for 20 Yale hoodies in size M, with 8 available now and 12 to be ordered after the required deposit. Assumes the quoted terms and restock timing supplied by boss are approved."
+          ]
+        }
+      },
+      "customer_message_sent_by_human": "Hello Yale AI Club,\n\nWe can offer 20 Yale hoodies in size M at 20% off: $46.40 per hoodie, for a total of $928.00. Eight are available now; the remaining 12 would be ordered after a required deposit of $464.00. If ordered today, the additional hoodies should be ready around 2026-09-05.\n\nPlease confirm whether you’d like to proceed and arrange the deposit.\n\nCampus Customs",
+      "human_approvals": [
+        {
+          "type": "marked_resolved",
+          "decided_by": "andrew",
+          "note": "Desk reviewed and sent the approved quote to the Yale AI Club (20% off: $46.40/unit, $928.00 total, $464.00 deposit; 8 ship now, 12 reordered after the deposit). Closed at the desk; the deposit is recorded with Record money received and the 12-unit reorder opens a new ticket.",
+          "audit_seq": 272
+        }
+      ]
+    }
+  ]
+}

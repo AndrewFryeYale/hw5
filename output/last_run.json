@@ -1,0 +1,244 @@
+{
+  "run_id": "4a1b7ff01326",
+  "dry_run": false,
+  "tickets_failed": [],
+  "resolutions": [
+    {
+      "ticket_id": 101,
+      "ticket_type": "customer_order",
+      "decision": "The requested size-S tee cannot be filled from current stock because 0 are on hand. I paid the open, 3-days-overdue $840 invoice that was blocking the vendor reprint; the size-S reprint is estimated ready on 2026-09-05 if ordered today. The customer may instead choose an immediately available size M, L, or XL, and the ticket is waiting for that choice.",
+      "agents_consulted": [
+        "accounting",
+        "customer_service",
+        "inventory"
+      ],
+      "payments_made": [
+        {
+          "payment_id": 1,
+          "kind": "invoice",
+          "ref_id": 501,
+          "amount": 840.0,
+          "new_balance": 2560.0
+        }
+      ],
+      "price_approved": null,
+      "new_status": "waiting_on_customer",
+      "customer_message": "Hello Tauhid,\n\nThe Classic Bulldog Tee in size S is currently out of stock. We have size M (5 available), size L (3 available), and size XL (2 available). Please reply with your preferred available size, or let us know if you specifically need size S; a reprint is estimated to be ready on September 5 if ordered today.\n\nCampus Customs",
+      "needs_human": true,
+      "human_reasons": [
+        "A person must review and send the customer message.",
+        "After the $840 payment, the balance is $2,560 and $160 remains after listed obligations, triggering the low-cash alert."
+      ],
+      "next_steps": [
+        "A person reviews and sends the customer message.",
+        "Customer chooses an in-stock size or confirms the size-S reprint.",
+        "Inventory places the size-S reprint after the customer's confirmation; estimated readiness is 2026-09-05 if ordered today."
+      ],
+      "facts": [
+        {
+          "name": "Requested item",
+          "value": "CC-TEE-WHITE, size S, quantity 1",
+          "source_tool": "get_ticket"
+        },
+        {
+          "name": "Size S on hand",
+          "value": "0",
+          "source_tool": "check_stock"
+        },
+        {
+          "name": "Size M on hand",
+          "value": "5",
+          "source_tool": "check_stock"
+        },
+        {
+          "name": "Size L on hand",
+          "value": "3",
+          "source_tool": "check_stock"
+        },
+        {
+          "name": "Size XL on hand",
+          "value": "2",
+          "source_tool": "check_stock"
+        },
+        {
+          "name": "Invoice 501",
+          "value": "Open, $840.0, 3 days overdue",
+          "source_tool": "get_invoice"
+        },
+        {
+          "name": "Invoice 501 payment",
+          "value": "$840.0 paid; new balance $2560.0",
+          "source_tool": "record_payment"
+        },
+        {
+          "name": "Reprint ready date if ordered today",
+          "value": "2026-09-05",
+          "source_tool": "list_vendors"
+        },
+        {
+          "name": "Balance after listed obligations",
+          "value": "$160.0",
+          "source_tool": "get_cash_position"
+        }
+      ]
+    },
+    {
+      "ticket_id": 102,
+      "ticket_type": "rent_notice",
+      "decision": "The rent notice was verified against lease 1: $2,400.00 is due on 2026-09-02, two days after the shop date. I paid the exact rent amount because it is due within seven days and the account covered it. The payment leaves checking at $160.00, so the ticket is escalated for human attention to the low cash position and to send the landlord confirmation.",
+      "agents_consulted": [
+        "accounting",
+        "facilities"
+      ],
+      "payments_made": [
+        {
+          "payment_id": 2,
+          "kind": "rent",
+          "ref_id": 1,
+          "amount": 2400.0,
+          "new_balance": 160.0
+        }
+      ],
+      "price_approved": null,
+      "new_status": "escalated",
+      "customer_message": "Elm City Properties, the $2,400.00 rent payment for the Chapel Street shop due September 2, 2026 has been made. Thank you.",
+      "needs_human": true,
+      "human_reasons": [
+        "Checking balance after rent payment is $160.00, below the $500 low-cash threshold; owner planning is needed.",
+        "A person must review and send the payment confirmation to Elm City Properties."
+      ],
+      "next_steps": [
+        "A person reviews and sends the payment confirmation to Elm City Properties.",
+        "The owner plans for the $160.00 remaining checking balance."
+      ],
+      "facts": [
+        {
+          "name": "Shop date",
+          "value": "2026-08-31",
+          "source_tool": "get_ticket"
+        },
+        {
+          "name": "Monthly rent",
+          "value": "2400.0",
+          "source_tool": "get_lease"
+        },
+        {
+          "name": "Rent due date",
+          "value": "2026-09-02",
+          "source_tool": "get_lease"
+        },
+        {
+          "name": "Days until rent due",
+          "value": "2",
+          "source_tool": "get_lease"
+        },
+        {
+          "name": "Checking balance before payment",
+          "value": "2560.0",
+          "source_tool": "get_cash_position"
+        },
+        {
+          "name": "Recorded rent payments before payment",
+          "value": "[]",
+          "source_tool": "list_payments"
+        },
+        {
+          "name": "Payment amount",
+          "value": "2400.0",
+          "source_tool": "record_payment"
+        },
+        {
+          "name": "Checking balance after payment",
+          "value": "160.0",
+          "source_tool": "record_payment"
+        },
+        {
+          "name": "Lease next due date after payment",
+          "value": "2026-10-02",
+          "source_tool": "record_payment"
+        },
+        {
+          "name": "Landlord",
+          "value": "Elm City Properties",
+          "source_tool": "get_lease"
+        }
+      ]
+    },
+    {
+      "ticket_id": 103,
+      "ticket_type": "price_override",
+      "decision": "Approved the maximum policy discount of 20% for the 20-unit order because the quoted price remains above cost with a 52.6% margin. The approved quote is $46.4 per hoodie, $928.0 total, with a required 50% deposit of $464.0 because 12 of the 20 size-M units must be reordered. Eight units are available now, and the reorder is ready by 2026-09-05 if ordered today; no payment was recorded because the deposit must come from the customer.",
+      "agents_consulted": [
+        "accounting",
+        "customer_service",
+        "inventory"
+      ],
+      "payments_made": [],
+      "price_approved": "20% off: $46.4/unit, $928.0 total, $464.0 deposit",
+      "new_status": "waiting_on_customer",
+      "customer_message": "Hello Yale AI Club,\n\nWe can offer 20% off 20 Basic Hoodie Big Yale hoodies in size M: $46.40 each, for a total of $928.00. We have 8 ready now; the remaining 12 would be reordered. The reorder would be ready about 5 days after the 50% deposit of $464.00, around 2026-09-05 if placed today.\n\nPlease confirm the order and arrange the deposit so we can proceed with the reorder.\n\nCampus Customs",
+      "needs_human": true,
+      "human_reasons": [
+        "A person must review and send the customer quote.",
+        "Customer confirmation and the $464.0 deposit are required before the reorder can be placed."
+      ],
+      "next_steps": [
+        "Await Yale AI Club's confirmation and $464.0 deposit.",
+        "After the deposit clears, inventory places the 12-unit reorder with Bulldog Print Co.",
+        "Release the 8 available size-M units now if the customer accepts a partial fill."
+      ],
+      "facts": [
+        {
+          "name": "Requested quantity",
+          "value": "20",
+          "source_tool": "get_ticket"
+        },
+        {
+          "name": "CC-HOOD-NAVY size M on hand",
+          "value": "8",
+          "source_tool": "check_stock"
+        },
+        {
+          "name": "Reorder shortfall",
+          "value": "12",
+          "source_tool": "quote_price"
+        },
+        {
+          "name": "Approved discount",
+          "value": "20.0%",
+          "source_tool": "quote_price"
+        },
+        {
+          "name": "Discounted unit price",
+          "value": "46.4",
+          "source_tool": "quote_price"
+        },
+        {
+          "name": "Order total",
+          "value": "928.0",
+          "source_tool": "quote_price"
+        },
+        {
+          "name": "Required deposit",
+          "value": "50.0%; 464.0",
+          "source_tool": "quote_price"
+        },
+        {
+          "name": "Margin percentage",
+          "value": "52.6%",
+          "source_tool": "quote_price"
+        },
+        {
+          "name": "Ready date if ordered today",
+          "value": "2026-09-05",
+          "source_tool": "list_vendors"
+        },
+        {
+          "name": "Current checking balance",
+          "value": "160.0",
+          "source_tool": "get_cash_position"
+        }
+      ]
+    }
+  ]
+}

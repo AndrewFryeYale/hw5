@@ -1,0 +1,515 @@
+{
+  "run_at": "2026-10-14T16:00:50",
+  "database": "data/campus_customs_new.db",
+  "connection": {
+    "config_file": ".mcp.json",
+    "server_name": "campus-customs",
+    "transport": "stdio",
+    "client": "fastmcp.Client (stdio, launched from .mcp.json)",
+    "tools_listed": [
+      "check_stock",
+      "get_invoice",
+      "get_lease",
+      "list_open_tickets",
+      "get_ticket",
+      "get_cash_position",
+      "list_vendors",
+      "quote_price",
+      "list_payments",
+      "record_payment",
+      "update_ticket"
+    ]
+  },
+  "results": [
+    {
+      "ticket": 101,
+      "prompt": "Ticket #101: Tauhid Zaman wants a Classic Bulldog Tee in size S. Do we have any in stock, where is it, and what does it cost?",
+      "tool": "check_stock",
+      "args": {
+        "sku": "CC-TEE-WHITE",
+        "size": "S"
+      },
+      "output": {
+        "sku": "CC-TEE-WHITE",
+        "stock": [
+          {
+            "sku": "CC-TEE-WHITE",
+            "name": "Classic Bulldog Tee",
+            "size": "S",
+            "qty": 0,
+            "location": "Aisle B"
+          }
+        ],
+        "total_qty": 0,
+        "pricing": {
+          "unit_cost": 8.0,
+          "list_price": 28.0
+        }
+      },
+      "db_check": {
+        "qty": {
+          "mcp": 0,
+          "db": 0,
+          "match": true
+        },
+        "location": {
+          "mcp": "Aisle B",
+          "db": "Aisle B",
+          "match": true
+        },
+        "unit_cost": {
+          "mcp": 8.0,
+          "db": 8.0,
+          "match": true
+        },
+        "list_price": {
+          "mcp": 28.0,
+          "db": 28.0,
+          "match": true
+        }
+      },
+      "all_match": true
+    },
+    {
+      "ticket": 101,
+      "prompt": "Ticket #101 links to invoice 501. Who is it owed to, how much, and is it overdue?",
+      "tool": "get_invoice",
+      "args": {
+        "invoice_id": 501
+      },
+      "output": {
+        "id": 501,
+        "amount": 840.0,
+        "due_date": "2026-08-28",
+        "status": "open",
+        "description": "Rush reprint CC-TEE-WHITE S",
+        "vendor_id": 1,
+        "vendor_name": "Bulldog Print Co",
+        "vendor_specialty": "apparel reprint",
+        "vendor_lead_days": 5,
+        "shop_date": "2026-08-31",
+        "days_overdue": 3
+      },
+      "db_check": {
+        "amount": {
+          "mcp": 840.0,
+          "db": 840.0,
+          "match": true
+        },
+        "due_date": {
+          "mcp": "2026-08-28",
+          "db": "2026-08-28",
+          "match": true
+        },
+        "status": {
+          "mcp": "open",
+          "db": "open",
+          "match": true
+        },
+        "vendor_name": {
+          "mcp": "Bulldog Print Co",
+          "db": "Bulldog Print Co",
+          "match": true
+        },
+        "days_overdue": {
+          "mcp": 3,
+          "db": 3.0,
+          "match": true
+        }
+      },
+      "all_match": true
+    },
+    {
+      "ticket": 102,
+      "prompt": "Ticket #102: Elm City Properties says rent is due in 2 days. Check lease 1 \u2014 how much is rent and when exactly is it due?",
+      "tool": "get_lease",
+      "args": {
+        "lease_id": 1
+      },
+      "output": {
+        "id": 1,
+        "space_name": "Chapel Street shop",
+        "landlord": "Elm City Properties",
+        "monthly_rent": 2400.0,
+        "next_due": "2026-09-02",
+        "notes": null,
+        "shop_date": "2026-08-31",
+        "days_until_due": 2
+      },
+      "db_check": {
+        "monthly_rent": {
+          "mcp": 2400.0,
+          "db": 2400.0,
+          "match": true
+        },
+        "next_due": {
+          "mcp": "2026-09-02",
+          "db": "2026-09-02",
+          "match": true
+        },
+        "landlord": {
+          "mcp": "Elm City Properties",
+          "db": "Elm City Properties",
+          "match": true
+        },
+        "days_until_due": {
+          "mcp": 2,
+          "db": 2.0,
+          "match": true
+        }
+      },
+      "all_match": true
+    },
+    {
+      "ticket": 103,
+      "prompt": "Ticket #103: Yale AI Club wants 20 Basic Hoodies in size M. How many do we have and what are the cost and list price?",
+      "tool": "check_stock",
+      "args": {
+        "sku": "CC-HOOD-NAVY",
+        "size": "M"
+      },
+      "output": {
+        "sku": "CC-HOOD-NAVY",
+        "stock": [
+          {
+            "sku": "CC-HOOD-NAVY",
+            "name": "Basic Hoodie Big Yale",
+            "size": "M",
+            "qty": 8,
+            "location": "Aisle A"
+          }
+        ],
+        "total_qty": 8,
+        "pricing": {
+          "unit_cost": 22.0,
+          "list_price": 58.0
+        }
+      },
+      "db_check": {
+        "qty": {
+          "mcp": 8,
+          "db": 8,
+          "match": true
+        },
+        "location": {
+          "mcp": "Aisle A",
+          "db": "Aisle A",
+          "match": true
+        },
+        "unit_cost": {
+          "mcp": 22.0,
+          "db": 22.0,
+          "match": true
+        },
+        "list_price": {
+          "mcp": 58.0,
+          "db": 58.0,
+          "match": true
+        }
+      },
+      "all_match": true
+    }
+  ],
+  "all_tests_pass": true,
+  "claude_code_connection": {
+    "client": "Claude Code (the vibe coder), loaded via .mcp.json + .claude/settings.local.json enabledMcpjsonServers",
+    "tools_available": [
+      "mcp__campus-customs__check_stock",
+      "mcp__campus-customs__get_invoice",
+      "mcp__campus-customs__get_lease"
+    ],
+    "calls": [
+      {
+        "tool": "mcp__campus-customs__check_stock",
+        "prompt": "Ticket #101: Is the Classic Bulldog Tee in size S in stock, where, and what does it cost?",
+        "args": {
+          "sku": "CC-TEE-WHITE",
+          "size": "S"
+        },
+        "output": {
+          "sku": "CC-TEE-WHITE",
+          "stock": [
+            {
+              "sku": "CC-TEE-WHITE",
+              "name": "Classic Bulldog Tee",
+              "size": "S",
+              "qty": 0,
+              "location": "Aisle B"
+            }
+          ],
+          "total_qty": 0,
+          "pricing": {
+            "unit_cost": 8,
+            "list_price": 28
+          }
+        },
+        "db_check": {
+          "qty": {
+            "mcp": 0,
+            "db": 0,
+            "match": true
+          },
+          "location": {
+            "mcp": "Aisle B",
+            "db": "Aisle B",
+            "match": true
+          },
+          "unit_cost": {
+            "mcp": 8,
+            "db": 8.0,
+            "match": true
+          },
+          "list_price": {
+            "mcp": 28,
+            "db": 28.0,
+            "match": true
+          }
+        },
+        "all_match": true
+      },
+      {
+        "tool": "mcp__campus-customs__get_invoice",
+        "prompt": "Ticket #101: Who is invoice 501 owed to, how much, and is it overdue?",
+        "args": {
+          "invoice_id": 501
+        },
+        "output": {
+          "id": 501,
+          "amount": 840,
+          "due_date": "2026-08-28",
+          "status": "open",
+          "description": "Rush reprint CC-TEE-WHITE S",
+          "vendor_id": 1,
+          "vendor_name": "Bulldog Print Co",
+          "vendor_specialty": "apparel reprint",
+          "vendor_lead_days": 5,
+          "shop_date": "2026-08-31",
+          "days_overdue": 3
+        },
+        "db_check": {
+          "amount": {
+            "mcp": 840,
+            "db": 840.0,
+            "match": true
+          },
+          "due_date": {
+            "mcp": "2026-08-28",
+            "db": "2026-08-28",
+            "match": true
+          },
+          "status": {
+            "mcp": "open",
+            "db": "open",
+            "match": true
+          },
+          "vendor_name": {
+            "mcp": "Bulldog Print Co",
+            "db": "Bulldog Print Co",
+            "match": true
+          },
+          "days_overdue": {
+            "mcp": 3,
+            "db": 3.0,
+            "match": true
+          }
+        },
+        "all_match": true
+      },
+      {
+        "tool": "mcp__campus-customs__get_lease",
+        "prompt": "Ticket #102: How much is rent on lease 1 and when exactly is it due?",
+        "args": {
+          "lease_id": 1
+        },
+        "output": {
+          "id": 1,
+          "space_name": "Chapel Street shop",
+          "landlord": "Elm City Properties",
+          "monthly_rent": 2400,
+          "next_due": "2026-09-02",
+          "notes": null,
+          "shop_date": "2026-08-31",
+          "days_until_due": 2
+        },
+        "db_check": {
+          "monthly_rent": {
+            "mcp": 2400,
+            "db": 2400.0,
+            "match": true
+          },
+          "next_due": {
+            "mcp": "2026-09-02",
+            "db": "2026-09-02",
+            "match": true
+          },
+          "landlord": {
+            "mcp": "Elm City Properties",
+            "db": "Elm City Properties",
+            "match": true
+          },
+          "days_until_due": {
+            "mcp": 2,
+            "db": 2.0,
+            "match": true
+          }
+        },
+        "all_match": true
+      }
+    ],
+    "all_match": true
+  },
+  "note": "Two checks live in this file. (1) 'results' and 'claude_code_connection' are the Problem 4 evidence, checked against data/campus_customs_new.db before any agent ran (checking $3,400.00, invoice 501 open, rent due 2026-09-02). Their tool list is the Problem 4 set; record_payment was later removed in Problem 7 when payments moved behind human approval. (2) 'post_run_check' re-checks the same server against the database as it is after the final runs (checking $160.00, invoice 501 paid, lease next_due 2026-10-02, all tickets resolved), using the current 16-tool list. Both sections match the database they were run against. Re-create (2) with: venv/bin/python mcp_server/smoke_test.py --post-run",
+  "post_run_check": {
+    "run_at": "2026-10-14T23:03:12",
+    "database": "data/campus_customs_new.db",
+    "why": "The Problem 4 results above were checked before any agent ran (checking $3,400.00, invoice 501 open, rent due 2026-09-02). The agent runs and human approvals have changed the database since, so this section re-checks the same server against the database as it is now.",
+    "tools_listed_now": [
+      "check_stock",
+      "get_invoice",
+      "get_lease",
+      "list_open_tickets",
+      "list_tickets",
+      "get_ticket",
+      "get_cash_position",
+      "list_vendors",
+      "quote_price",
+      "list_payments",
+      "request_approval",
+      "list_approvals",
+      "decide_approval",
+      "record_receipt",
+      "list_receipts",
+      "update_ticket"
+    ],
+    "results": [
+      {
+        "prompt": "What is the checking balance now?",
+        "tool": "get_cash_position",
+        "args": {
+          "account": "checking"
+        },
+        "mcp": {
+          "balance": 160.0
+        },
+        "db": {
+          "balance": 160.0
+        },
+        "match": true
+      },
+      {
+        "prompt": "Which payments have been made, and for how much in total?",
+        "tool": "list_payments",
+        "args": {},
+        "mcp": {
+          "count": 2,
+          "total": 3240.0,
+          "approved_by": [
+            "human:andrew"
+          ]
+        },
+        "db": {
+          "count": 2,
+          "total": 3240.0,
+          "approved_by": [
+            "human:andrew"
+          ]
+        },
+        "match": true
+      },
+      {
+        "prompt": "Ticket #101: is invoice 501 still open?",
+        "tool": "get_invoice",
+        "args": {
+          "invoice_id": 501
+        },
+        "mcp": {
+          "status": "paid",
+          "amount": 840.0
+        },
+        "db": {
+          "status": "paid",
+          "amount": 840.0
+        },
+        "match": true
+      },
+      {
+        "prompt": "Ticket #102: when is rent on lease 1 due next?",
+        "tool": "get_lease",
+        "args": {
+          "lease_id": 1
+        },
+        "mcp": {
+          "next_due": "2026-10-02",
+          "monthly_rent": 2400.0
+        },
+        "db": {
+          "next_due": "2026-10-02",
+          "monthly_rent": 2400.0
+        },
+        "match": true
+      },
+      {
+        "prompt": "What status is every ticket in?",
+        "tool": "list_tickets",
+        "args": {},
+        "mcp": {
+          "101": "resolved",
+          "102": "resolved",
+          "103": "resolved"
+        },
+        "db": {
+          "101": "resolved",
+          "102": "resolved",
+          "103": "resolved"
+        },
+        "match": true
+      },
+      {
+        "prompt": "Which approvals did a human decide?",
+        "tool": "list_approvals",
+        "args": {},
+        "mcp": {
+          "2": [
+            "approved",
+            2400.0,
+            "andrew"
+          ],
+          "1": [
+            "approved",
+            840.0,
+            "andrew"
+          ]
+        },
+        "db": {
+          "1": [
+            "approved",
+            840.0,
+            "andrew"
+          ],
+          "2": [
+            "approved",
+            2400.0,
+            "andrew"
+          ]
+        },
+        "match": true
+      },
+      {
+        "prompt": "Ticket #103: how many size-M hoodies are on hand?",
+        "tool": "check_stock",
+        "args": {
+          "sku": "CC-HOOD-NAVY",
+          "size": "M"
+        },
+        "mcp": {
+          "qty": 8
+        },
+        "db": {
+          "qty": 8
+        },
+        "match": true
+      }
+    ],
+    "all_match": true
+  }
+}
